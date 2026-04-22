@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自在</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, sans-serif; background: #f5f5f5; padding: 20px; }
+.container { max-width: 500px; margin: 0 auto; }
+h1 { text-align: center; color: #333; margin-bottom: 20px; }
+.card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.q { color: #666; font-size: 14px; margin-bottom: 8px; }
+.input-group { margin-bottom: 15px; }
+input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+.btn { width: 100%; padding: 14px; background: #4CAF50; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+.btn:active { background: #45a049; }
+.plan { display: none; margin-top: 20px; }
+.plan h3 { color: #4CAF50; margin-bottom: 10px; }
+.plan-item { padding: 8px 0; border-bottom: 1px solid #eee; display: flex; }
+.plan-item .time { width: 60px; color: #999; font-size: 14px; }
+.plan-item .text { flex: 1; }
+.plan .cost { margin-top: 10px; color: #666; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>自在</h1>
+  <div class="card">
+    <div class="input-group">
+      <div class="q">你现在在哪？</div>
+      <input type="text" id="location" placeholder="比如：潮阳站">
+    </div>
+    <div class="input-group">
+      <div class="q">有几个小时？</div>
+      <select id="duration">
+        <option value="4">4小时</option>
+        <option value="3">3小时</option>
+        <option value="2">2小时</option>
+        <option value="1">1小时</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <div class="q">想轻松还是深度？</div>
+      <select id="type">
+        <option value="轻松">轻松</option>
+        <option value="深度">深度</option>
+      </select>
+    </div>
+    <button class="btn" onclick="getPlan()">给我方案</button>
+  </div>
+
+  <div class="plan" id="plan">
+    <div class="card">
+      <h3 id="planTitle"></h3>
+      <div id="planContent"></div>
+      <div class="cost" id="planCost"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    location: "潮阳站",
+    slots: [
+      { duration: 4, type: "轻松", title: "潮阳夜市慢走", timeline: [
+        { time: "21:00", activity: "高铁站出来，打车到潮阳夜市" },
+        { time: "21:15", activity: "夜市逛一圈，买点小吃边走边吃" },
+        { time: "21:45", activity: "找家便利店休息一下" },
+        { time: "22:05", activity: "夜市附近散散步，吹吹风" },
+        { time: "22:35", activity: "吃个夜宵" },
+        { time: "23:05", activity: "回程" }
+      ], cost: "30-50元" }
+    ]
+  },
+  {
+    location: "铜盂",
+    slots: [
+      { duration: 3, type: "轻松", title: "铜盂慢节奏半日游", timeline: [
+        { time: "15:00", activity: "老广场走走，看看老房子" },
+        { time: "15:15", activity: "福德桥头买碗草粿" },
+        { time: "15:30", activity: "菜市场逛一圈" },
+        { time: "15:45", activity: "打车去英歌小镇" },
+        { time: "16:05", activity: "英歌小镇逛逛" },
+        { time: "16:45", activity: "找家肠粉店吃下午茶" },
+        { time: "17:30", activity: "找家粿条店吃晚餐" },
+        { time: "18:00", activity: "回程" }
+      ], cost: "40-60元" }
+    ]
+  }
+];
+
+function getPlan() {
+  const loc = document.getElementById('location').value;
+  const dur = parseInt(document.getElementById('duration').value);
+  const type = document.getElementById('type').value;
+  
+  let result = null;
+  for (const d of data) {
+    if (loc.includes(d.location) || d.location.includes(loc)) {
+      for (const slot of d.slots) {
+        if (slot.type === type && slot.duration === dur) {
+          result = slot;
+          break;
+        }
+      }
+    }
+  }
+  
+  if (result) {
+    document.getElementById('planTitle').innerText = '【' + result.title + '】';
+    let html = '';
+    for (const t of result.timeline) {
+      html += '<div class="plan-item"><span class="time">' + t.time + '</span><span class="text">' + t.activity + '</span></div>';
+    }
+    document.getElementById('planContent').innerHTML = html;
+    document.getElementById('planCost').innerText = '💰 预计花费：' + result.cost;
+    document.getElementById('plan').style.display = 'block';
+  } else {
+    alert('这个地点暂时没有方案');
+  }
+}
+</script>
+</body>
+</html>
