@@ -3,51 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>自在</title>
+<title>自在 - 临时空档去哪玩</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, sans-serif; background: #f5f5f5; padding: 20px; }
-.container { max-width: 500px; margin: 0 auto; }
-h1 { text-align: center; color: #333; margin-bottom: 20px; }
-.card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.q { color: #666; font-size: 14px; margin-bottom: 8px; }
-.input-group { margin-bottom: 15px; }
-input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
-.btn { width: 100%; padding: 14px; background: #4CAF50; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-.btn:active { background: #45a049; }
-.plan { display: none; margin-top: 20px; }
-.plan h3 { color: #4CAF50; margin-bottom: 10px; }
-.plan-item { padding: 8px 0; border-bottom: 1px solid #eee; display: flex; }
-.plan-item .time { width: 60px; color: #999; font-size: 14px; }
-.plan-item .text { flex: 1; }
-.plan .cost { margin-top: 10px; color: #666; font-size: 14px; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+.container { max-width: 480px; margin: 0 auto; }
+.logo { text-align: center; margin-bottom: 20px; }
+.logo h1 { 
+  color: white; 
+  font-size: 32px; 
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.logo p { color: rgba(255,255,255,0.8); font-size: 14px; margin-top: 5px; }
+.card { 
+  background: white; 
+  border-radius: 16px; 
+  padding: 24px; 
+  margin-bottom: 16px; 
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+.q { color: #333; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
+.input-group { margin-bottom: 20px; }
+input, select { 
+  width: 100%; 
+  padding: 14px 16px; 
+  border: 2px solid #eee; 
+  border-radius: 12px; 
+  font-size: 16px;
+  transition: border-color 0.3s;
+  background: #fafafa;
+}
+input:focus, select:focus { 
+  outline: none; 
+  border-color: #667eea; 
+  background: white;
+}
+.btn { 
+  width: 100%; 
+  padding: 16px; 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white; 
+  border: none; 
+  border-radius: 12px; 
+  font-size: 17px; 
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:active { transform: scale(0.98); }
+.btn:hover { box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+
+.random-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  margin-top: 10px;
+}
+
+.plan { display: none; animation: slideUp 0.3s ease; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.plan h3 { 
+  color: #667eea; 
+  font-size: 18px; 
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+.plan-item { 
+  padding: 12px 0; 
+  border-bottom: 1px solid #f5f5f5; 
+  display: flex;
+  align-items: flex-start;
+}
+.plan-item:last-child { border-bottom: none; }
+.plan-item .time { 
+  width: 55px; 
+  color: #999; 
+  font-size: 13px; 
+  flex-shrink: 0;
+}
+.plan-item .text { 
+  flex: 1; 
+  color: #333;
+  line-height: 1.5;
+}
+.plan .cost { 
+  margin-top: 16px; 
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.tag {
+  padding: 6px 12px;
+  background: #f0f0f0;
+  color: #666;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tag:hover, .tag.active {
+  background: #667eea;
+  color: white;
+}
+.history { margin-top: 20px; }
+.history-title { 
+  color: rgba(255,255,255,0.8); 
+  font-size: 14px; 
+  margin-bottom: 10px;
+}
+.history-item {
+  background: rgba(255,255,255,0.15);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+}
+.history-item:hover { background: rgba(255,255,255,0.25); }
+.empty { text-align: center; color: #999; padding: 20px; font-size: 14px; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>自在</h1>
+  <div class="logo">
+    <h1>自在</h1>
+    <p>想去哪，就去哪</p>
+  </div>
+  
   <div class="card">
-    <div class="input-group">
-      <div class="q">你现在在哪？</div>
-      <input type="text" id="location" placeholder="比如：潮阳站">
+    <div class="tags">
+      <span class="tag active" data-loc="">全部</span>
+      <span class="tag" data-loc="潮阳">潮阳</span>
+      <span class="tag" data-loc="汕头">汕头</span>
+      <span class="tag" data-loc="铜盂">铜盂</span>
     </div>
+    
     <div class="input-group">
-      <div class="q">有几个小时？</div>
+      <div class="q">📍 你现在在哪？</div>
+      <input type="text" id="location" placeholder="比如：潮阳站、汕头万象城">
+    </div>
+    
+    <div class="input-group">
+      <div class="q">⏰ 有几个小时？</div>
       <select id="duration">
-        <option value="4">4小时</option>
-        <option value="3">3小时</option>
-        <option value="2">2小时</option>
-        <option value="1">1小时</option>
+        <option value="4">4小时 - 下午/晚上</option>
+        <option value="3">3小时 - 下午茶时间</option>
+        <option value="2">2小时 - 短暂间隙</option>
+        <option value="1">1小时 - 速战速决</option>
       </select>
     </div>
+    
     <div class="input-group">
-      <div class="q">想轻松还是深度？</div>
+      <div class="q">🎯 想怎么玩？</div>
       <select id="type">
-        <option value="轻松">轻松</option>
-        <option value="深度">深度</option>
+        <option value="轻松">🌿 轻松 - 随便逛逛</option>
+        <option value="深度">🔥 深度 - 认真玩</option>
+        <option value="美食">🍜 美食 - 吃为重点</option>
       </select>
     </div>
+    
     <button class="btn" onclick="getPlan()">给我方案</button>
+    <button class="btn random-btn" onclick="randomPick()">🎲 随机一个</button>
   </div>
 
   <div class="plan" id="plan">
@@ -57,70 +189,217 @@ input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radiu
       <div class="cost" id="planCost"></div>
     </div>
   </div>
+  
+  <div class="history" id="history" style="display:none;">
+    <div class="history-title">最近查找</div>
+    <div id="historyList"></div>
+  </div>
 </div>
 
 <script>
 const data = [
   {
     location: "潮阳站",
+    area: "潮阳",
     slots: [
       { duration: 4, type: "轻松", title: "潮阳夜市慢走", timeline: [
-        { time: "21:00", activity: "高铁站出来，打车到潮阳夜市" },
-        { time: "21:15", activity: "夜市逛一圈，买点小吃边走边吃" },
-        { time: "21:45", activity: "找家便利店休息一下" },
+        { time: "21:00", activity: "高铁站出来，打车到潮阳夜市（约15元）" },
+        { time: "21:15", activity: "夜市逛一圈，看看有啥新鲜小吃" },
+        { time: "21:45", activity: "便利店休息一下，买瓶水" },
         { time: "22:05", activity: "夜市附近散散步，吹吹风" },
-        { time: "22:35", activity: "吃个夜宵" },
-        { time: "23:05", activity: "回程" }
-      ], cost: "30-50元" }
+        { time: "22:35", activity: "夜宵时间！肠粉或粿条" },
+        { time: "23:05", activity: "打车回程" }
+      ], cost: "40-60元", tags: ["夜市", "小吃"] },
+      { duration: 4, type: "美食", title: "潮阳美食之旅", timeline: [
+        { time: "18:00", activity: "先到镇政府附近的老牌肠粉店" },
+        { time: "18:30", activity: "导航去棉城菜市场吃炸豆干" },
+        { time: "19:15", activity: "找一家老式粿条汤店" },
+        { time: "20:00", activity: "绕到凤岗附近逛逛消食" },
+        { time: "20:45", activity: "最后一站：夜市糖水铺" },
+        { time: "21:30", activity: "回程" }
+      ], cost: "50-80元", tags: ["美食", "肠粉", "粿条"] },
+      { duration: 3, type: "轻松", title: "潮阳下午茶", timeline: [
+        { time: "15:00", activity: "棉城出发，打车到东塔" },
+        { time: "15:20", activity: "东山塔公园逛逛，爬个小山" },
+        { time: "16:00", activity: "下来找家咖啡店/茶饮店休息" },
+        { time: "17:00", activity: "附近逛逛，看看有啥小店" },
+        { time: "17:30", activity: "找地方吃晚餐" }
+      ], cost: "30-50元", tags: ["公园", "休闲"] }
     ]
   },
   {
     location: "铜盂",
+    area: "铜盂",
     slots: [
       { duration: 3, type: "轻松", title: "铜盂慢节奏半日游", timeline: [
         { time: "15:00", activity: "老广场走走，看看老房子" },
-        { time: "15:15", activity: "福德桥头买碗草粿" },
+        { time: "15:15", activity: "福德桥头买碗草粿（3元）" },
         { time: "15:30", activity: "菜市场逛一圈" },
-        { time: "15:45", activity: "打车去英歌小镇" },
-        { time: "16:05", activity: "英歌小镇逛逛" },
+        { time: "15:45", activity: "打车去英歌小镇（约20元）" },
+        { time: "16:05", activity: "英歌小镇逛逛，拍拍照" },
         { time: "16:45", activity: "找家肠粉店吃下午茶" },
         { time: "17:30", activity: "找家粿条店吃晚餐" },
         { time: "18:00", activity: "回程" }
-      ], cost: "40-60元" }
+      ], cost: "40-60元", tags: ["怀旧", "老街"] },
+      { duration: 2, type: "轻松", title: "铜盂1小时速玩", timeline: [
+        { time: "17:00", activity: "直接去老广场" },
+        { time: "17:10", activity: "福德桥吃草粿" },
+        { time: "17:25", activity: "桥上看看风景" },
+        { time: "17:50", activity: "附近找点吃的" }
+      ], cost: "15-25元", tags: ["速战速决"] }
+    ]
+  },
+  {
+    location: "汕头万象城",
+    area: "汕头",
+    slots: [
+      { duration: 4, type: "轻松", title: "汕头市区逛吃", timeline: [
+        { time: "14:00", activity: "万象城逛逛，看看有啥新店" },
+        { time: "15:00", activity: "打车去小公园（10元）" },
+        { time: "15:20", activity: "小公园老城区citywalk" },
+        { time: "16:30", activity: "导航去龙眼南路美食街" },
+        { time: "17:00", activity: "从头吃到尾：腐乳鸡翅、瑞娇妈妈粿汁..." },
+        { time: "18:30", activity: "走回去万象城，打车回程" }
+      ], cost: "60-100元", tags: ["美食", "citywalk"] },
+      { duration: 3, type: "美食", title: "汕头美食专线", timeline: [
+        { time: "11:30", activity: "早餐：十二中草莓冰" },
+        { time: "12:00", activity: "附近吃个粿条/肠粉" },
+        { time: "13:00", activity: "龙眼南路走一圈，尝各种小吃" },
+        { time: "14:30", activity: "咖啡店休息一下" },
+        { time: "15:30", activity: "继续吃 or 打道回府" }
+      ], cost: "40-70元", tags: ["美食", "小吃"] }
+    ]
+  },
+  {
+    location: "潮汕站",
+    area: "潮汕",
+    slots: [
+      { duration: 4, type: "轻松", title: "潮汕站周边游", timeline: [
+        { time: "12:00", activity: "高铁站出来，先找地方吃午餐" },
+        { time: "12:45", activity: "打车去潮州古城（约30元）" },
+        { time: "13:15", activity: "牌坊街逛逛" },
+        { time: "14:30", activity: "开元寺看看" },
+        { time: "15:30", activity: "韩文公祠" },
+        { time: "16:30", activity: "返回牌坊街吃晚餐" },
+        { time: "18:00", activity: "打车回潮汕站" }
+      ], cost: "80-120元", tags: ["古城", "历史"] }
     ]
   }
 ];
+
+// 标签筛选
+document.querySelectorAll('.tag').forEach(tag => {
+  tag.addEventListener('click', () => {
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    tag.classList.add('active');
+    const loc = tag.dataset.loc;
+    document.getElementById('location').value = loc;
+  });
+});
 
 function getPlan() {
   const loc = document.getElementById('location').value;
   const dur = parseInt(document.getElementById('duration').value);
   const type = document.getElementById('type').value;
   
-  let result = null;
+  saveHistory(loc, dur, type);
+  
+  let results = [];
+  
+  // 匹配逻辑
   for (const d of data) {
-    if (loc.includes(d.location) || d.location.includes(loc)) {
+    const matchLoc = loc && (d.location.includes(loc) || loc.includes(d.location) || d.area.includes(loc) || loc.includes(d.area));
+    if (!loc || matchLoc) {
       for (const slot of d.slots) {
-        if (slot.type === type && slot.duration === dur) {
-          result = slot;
-          break;
+        if (slot.duration <= dur && (slot.type === type || slot.type === "轻松")) {
+          results.push({ ...slot, location: d.location });
         }
       }
     }
   }
   
-  if (result) {
-    document.getElementById('planTitle').innerText = '【' + result.title + '】';
-    let html = '';
-    for (const t of result.timeline) {
-      html += '<div class="plan-item"><span class="time">' + t.time + '</span><span class="text">' + t.activity + '</span></div>';
-    }
-    document.getElementById('planContent').innerHTML = html;
-    document.getElementById('planCost').innerText = '💰 预计花费：' + result.cost;
-    document.getElementById('plan').style.display = 'block';
-  } else {
-    alert('这个地点暂时没有方案');
-  }
+  showResult(results, loc, dur);
 }
+
+function randomPick() {
+  const allSlots = [];
+  for (const d of data) {
+    for (const slot of d.slots) {
+      allSlots.push({ ...slot, location: d.location });
+    }
+  }
+  
+  const random = allSlots[Math.floor(Math.random() * allSlots.length)];
+  showResult([random], "", 4);
+}
+
+function showResult(results, loc, dur) {
+  const planDiv = document.getElementById('plan');
+  
+  if (results.length === 0) {
+    document.getElementById('planTitle').innerText = '暂无方案';
+    document.getElementById('planContent').innerHTML = '<div class="empty">这个地点暂时没有方案<br>试试其他地点或关键词</div>';
+    document.getElementById('planCost').innerText = '';
+    planDiv.style.display = 'block';
+    return;
+  }
+  
+  const result = results[0]; // 暂时只显示第一个最匹配的
+  document.getElementById('planTitle').innerText = '📍 ' + result.location + ' | ' + result.title;
+  
+  let html = '';
+  for (const t of result.timeline) {
+    html += `<div class="plan-item"><span class="time">${t.time}</span><span class="text">${t.activity}</span></div>`;
+  }
+  
+  const tagsHtml = result.tags ? result.tags.map(t => `#${t}`).join(' ') : '';
+  document.getElementById('planContent').innerHTML = html;
+  document.getElementById('planCost').innerHTML = `💰 预计花费：${result.cost} ${tagsHtml}`;
+  planDiv.style.display = 'block';
+  planDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+function saveHistory(loc, dur, type) {
+  if (!loc) return;
+  let history = JSON.parse(localStorage.getItem('zizai_history') || '[]');
+  const key = `${loc}-${dur}-${type}`;
+  
+  // 去重
+  history = history.filter(h => h.key !== key);
+  history.unshift({ key, loc, dur, type, time: new Date().toLocaleTimeString() });
+  history = history.slice(0, 5);
+  
+  localStorage.setItem('zizai_history', JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('zizai_history') || '[]');
+  const historyDiv = document.getElementById('history');
+  const listDiv = document.getElementById('historyList');
+  
+  if (history.length === 0) {
+    historyDiv.style.display = 'none';
+    return;
+  }
+  
+  historyDiv.style.display = 'block';
+  listDiv.innerHTML = history.map(h => 
+    `<div class="history-item" onclick="loadHistory('${h.loc}', ${h.dur}, '${h.type}')">
+      ${h.loc} · ${h.dur}小时 · ${h.type}
+    </div>`
+  ).join('');
+}
+
+function loadHistory(loc, dur, type) {
+  document.getElementById('location').value = loc;
+  document.getElementById('duration').value = dur;
+  document.getElementById('type').value = type;
+  getPlan();
+}
+
+// 页面加载显示历史
+renderHistory();
 </script>
 </body>
 </html>
